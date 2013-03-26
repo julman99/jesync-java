@@ -1,0 +1,8 @@
+.DS_Store
+build*
+nbproject
+manifest.mf
+dist
+target
+dependency-reduced-pom.xml
+nb-configuration.xml
