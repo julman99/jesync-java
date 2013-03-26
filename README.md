@@ -8,11 +8,22 @@ Usage:
 
 
 ```java
+//Create the client
 JESyncClient jesync = new JESyncClient("127.0.0.1:11400"); //more than 1 host can be specified, the driver will hash the key and select a host
-JESyncLock lock = jesync.lock("test", 1, 1, 20); //key, concurrent locks, timeout for lock, grant time (see JESync docs)
+
+//This call will block the execution for at the most 10 seconds (second parameter)
+JESyncLock lock = jesync.lock("test", 1, 10, 20); 
 if(lock.isGranted()){
-    //Critical code here
+    //Lock granted for 20 seconds in the server (third parameter on the lock function)
+    
+    //Critical code
+    //...blah()
+    //End of critical code
+
     lock.release();
 }
  
 ``` 
+
+# Multiple Servers
+You can use multiple servers with a single JESyncClient object. When lock() is called, the key is hashed against the server list and the key is locked in that particular server only. It is a simple way to "horizontally scale" inspired in memcached mechanism.
