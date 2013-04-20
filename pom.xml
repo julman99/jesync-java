@@ -3,8 +3,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.github.julman99.jesync</groupId>
-  <artifactId>JESync-java-client</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <artifactId>jesync-java-client</artifactId>
+  <version>0.2</version>
   <packaging>jar</packaging>
 
   <name>JESync-java-client</name>
