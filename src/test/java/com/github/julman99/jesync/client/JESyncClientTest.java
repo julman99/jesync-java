@@ -1,5 +1,6 @@
 package com.github.julman99.jesync.client;
 
+import java.io.IOException;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 import junit.framework.TestCase;
@@ -52,5 +53,36 @@ public class JESyncClientTest extends TestCase {
         
         assertTrue(lock.release());
         assertFalse(lock.isGranted());
+    }
+    
+    
+    /**
+     * Tests a lock is release when the lock object is garbage collected
+     */
+    public void testGC() throws IOException{
+        
+        JESyncClient jesync = new JESyncClient("127.0.0.1:11400");
+        
+        JESyncLock lock = jesync.lock("test", 1, 1, 120);
+        assertTrue(lock.isGranted());
+        
+        lock = null; //we null the variable to make it available for the garbage collector
+        
+        long start = System.currentTimeMillis();
+        
+        while(true){
+            JESyncLock lock2 = jesync.lock("test", 1, 0, 20);
+            if(lock2.isGranted()){
+                assertTrue(true);
+                break;
+            }
+            
+            if(System.currentTimeMillis() - start > 5 * 1000){
+                fail("Lock was not garbage collected");
+            }
+            
+            System.gc();
+        }
+        
     }
 }

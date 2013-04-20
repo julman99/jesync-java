@@ -101,5 +101,15 @@ public final class JESyncLock {
         this.setGranted(false);
         return this.client.lock(key, maxConcurrent, 0, 0);
     }
+
+    @Override
+    protected void finalize() throws Throwable {
+        if(this.isGranted()){
+            release();
+        }
+        super.finalize();
+    }
+    
+    
     
 }
