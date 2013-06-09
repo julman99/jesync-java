@@ -1,8 +1,4 @@
-.DS_Store
-build*
-nbproject
-manifest.mf
-dist
+.idea
+*.iml
 target
-dependency-reduced-pom.xml
-nb-configuration.xml
+settings.xml

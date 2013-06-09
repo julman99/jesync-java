@@ -27,3 +27,22 @@ if(lock.isGranted()){
 
 # Multiple Servers
 You can use multiple servers with a single JESyncClient object. When lock() is called, the key is hashed against the server list and the key is locked in that particular server only. It is a simple way to "horizontally scale" inspired in memcached mechanism.
+
+## Usage
+Add to your ```pom.xml```
+
+```xml
+<repositories>
+    <repository>
+        <id>julman99-github</id>
+        <url>https://raw.github.com/julman99/mvn-repo/master</url>
+    </repository>
+<repositories>
+<dependencies>
+    <dependency>
+        <groupId>com.github.julman99.jesync</groupId>
+        <artifactId>jesync-java-client</artifactId>
+        <version>0.2</version>
+    </dependency>
+</dependencies>
+```
